@@ -9,24 +9,20 @@ plugins {
 
 group = "me.r09i"
 version = "0.1.0"
+
 java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.linecorp.bot:line-bot-spring-boot:4.7.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
-
-val jar by tasks.getting(Jar::class) {
-    manifest {
-        attributes["Main-Class"] = "me.r09i.springbootlinebot.SpringBootLineBotApplicationKt"
-    }
 }
 
 tasks.withType<KotlinCompile> {
@@ -34,6 +30,11 @@ tasks.withType<KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
     }
+}
+
+tasks.getByName<Jar>("jar") {
+    // Don't let plain.jar be generated
+    enabled = false
 }
 
 tasks.withType<Test> {
