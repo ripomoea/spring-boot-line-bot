@@ -23,6 +23,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
+val jar by tasks.getting(Jar::class) {
+    manifest {
+        attributes["Main-Class"] = "me.r09i.springbootlinebot.SpringBootLineBotApplicationKt"
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
