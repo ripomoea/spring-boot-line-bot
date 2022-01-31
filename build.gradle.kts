@@ -21,6 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.linecorp.bot:line-bot-api-client:4.7.0")
     implementation("com.linecorp.bot:line-bot-spring-boot:4.7.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
