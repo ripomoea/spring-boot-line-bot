@@ -1,6 +1,7 @@
 package me.r09i.springbootlinebot
 
 import com.linecorp.bot.client.LineMessagingClient
+import com.linecorp.bot.model.Broadcast
 import com.linecorp.bot.model.PushMessage
 import com.linecorp.bot.model.message.TextMessage
 import org.springframework.beans.factory.annotation.Value
@@ -17,20 +18,14 @@ class TestTask {
         LineMessagingClient.builder(channelToken).build()
     }
 
-    private val testUserId = ""
-
-    @Scheduled(initialDelay = 5000, fixedRate = 10000)
+    @Scheduled(initialDelay = 5000, fixedRate = 30000)
     fun task1() {
-        if (testUserId.isEmpty()) return
+        return
 
-        val textMessage = TextMessage("hello")
-        val pushMessage = PushMessage(
-            testUserId,
-            textMessage
-        )
+        val textMessage = TextMessage("Hello")
 
         val botApiResponse = try {
-            client.pushMessage(pushMessage).get()
+            client.broadcast(Broadcast(textMessage)).get()
         } catch (e: InterruptedException) {
             e.printStackTrace()
             return
